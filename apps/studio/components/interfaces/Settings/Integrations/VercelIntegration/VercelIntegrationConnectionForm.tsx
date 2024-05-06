@@ -78,17 +78,6 @@ const VercelIntegrationConnectionForm = ({
 
   return (
     <Form_Shadcn_ {...form}>
-      <div className="py-4 px-8">
-        <Alert_Shadcn_ variant="default">
-          <IconClock className="h-4 w-4" strokeWidth={2} />
-          <AlertTitle_Shadcn_>Vercel Connection configuration coming soon</AlertTitle_Shadcn_>
-          <AlertDescription_Shadcn_>
-            This configuration will allow you to control the environment variables and auth
-            redirects for production and preview deployments.
-          </AlertDescription_Shadcn_>
-        </Alert_Shadcn_>
-      </div>
-      <ScaffoldDivider />
       <form onSubmit={form.handleSubmit(onSubmit)} className={'w-full space-y-6'}>
         <div>
           <div className="flex flex-col gap-6 px-8 py-8">

@@ -22,6 +22,7 @@ import { useVercelProjectsQuery } from 'data/integrations/integrations-vercel-pr
 import type {
   IntegrationName,
   IntegrationProjectConnection,
+  VercelFramework,
 } from 'data/integrations/integrations.types'
 import { useSelectedOrganization, useSelectedProject } from 'hooks'
 import { pluralize } from 'lib/helpers'
@@ -65,7 +66,39 @@ const VercelSection = ({ isProjectScoped }: { isProjectScoped: boolean }) => {
 
   // We're only supporting one Vercel integration per org for now
   // this will need to be updated when we support multiple integrations
-  const vercelIntegration = vercelIntegrations?.[0]
+  const vercelIntegration = vercelIntegrations?.[0] || {
+    id: '123',
+    inserted_at: new Date().toString(),
+    updated_at: new Date().toString(),
+    added_by: {
+      username: 'a',
+      id: 'a',
+      primary_email: 'as',
+    },
+    organization: { slug: '123' },
+    integration: { name: 'Vercel' },
+    connections: [
+      {
+        id: '123',
+        inserted_at: new Date().toString(),
+        updated_at: new Date().toString(),
+        env_sync_targets: ['production', 'preview'],
+        added_by: {
+          username: 'a',
+          id: 'a',
+          primary_email: 'as',
+        },
+        supabase_project_ref: '123',
+        foreign_project_id: '123',
+        organization_integration_id: '123',
+        metadata: {
+          id: '123',
+          name: 'asd',
+          framework: 'nextjs' as VercelFramework,
+        },
+      },
+    ],
+  }
   const { data: vercelProjectsData } = useVercelProjectsQuery(
     {
       organization_integration_id: vercelIntegration?.id,
@@ -125,12 +158,14 @@ You can change the scope of the access for Supabase by configuring
         ? `https://vercel.com/integrations/supabase-v2-staging`
         : 'https://vercel.com/integrations/supabase-v2-local'
 
-  let connections =
-    (isProjectScoped
-      ? vercelIntegration?.connections.filter(
-          (connection) => connection.supabase_project_ref === project?.ref
-        )
-      : vercelIntegration?.connections) || []
+  // let connections =
+  //   (isProjectScoped
+  //     ? vercelIntegration?.connections.filter(
+  //         (connection) => connection.supabase_project_ref === project?.ref
+  //       )
+  //     : vercelIntegration?.connections) || []
+
+  let connections = vercelIntegration!.connections
 
   const ConnectionHeaderTitle = `${connections.length} project ${pluralize(
     connections.length,
