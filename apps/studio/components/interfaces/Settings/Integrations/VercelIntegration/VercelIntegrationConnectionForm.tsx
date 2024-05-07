@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 import type {
+  EnvironmentTargets,
   Integration,
   IntegrationProjectConnection,
 } from 'data/integrations/integrations.types'
@@ -25,7 +26,7 @@ const VercelIntegrationConnectionForm = ({
   connection: IntegrationProjectConnection
   integration: Integration
 }) => {
-  const envSyncTargets = connection.env_sync_targets
+  const envSyncTargets = connection.env_sync_targets ?? []
 
   const FormSchema = z.object({
     environmentVariablesProduction: z.boolean().default(envSyncTargets.includes('production')),
@@ -61,7 +62,7 @@ const VercelIntegrationConnectionForm = ({
 
     updateVercelConnection({
       id: connection.id,
-      envSyncTargets: envSyncTargets,
+      envSyncTargets: envSyncTargets as EnvironmentTargets[],
       organizationIntegrationId: integration.id,
     })
   }

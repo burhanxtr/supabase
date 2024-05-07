@@ -265,7 +265,7 @@ export type GitHubConnectionCreateVariables = {
   connection: components['schemas']['CreateGitHubConnectionsBody']
 }
 
-type EnvironmentTargets = 'production' | 'preview' | 'development'
+export type EnvironmentTargets = 'production' | 'preview' | 'development'
 
 export type UpdateConnectionPayload = {
   id: string
