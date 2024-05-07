@@ -4687,7 +4687,7 @@ export interface components {
       env_sync_error?: components['schemas']['SyncVercelEnvError']
     }
     UpdateVercelConnectionsBody: {
-      env_sync?: ('production' | 'preview' | 'development')[]
+      env_sync_targets?: ('production' | 'preview' | 'development')[]
     }
     DeleteVercelConnectionResponse: {
       id: string

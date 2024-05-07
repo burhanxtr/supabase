@@ -1,6 +1,5 @@
 import { useMutation, UseMutationOptions, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
-import type { components } from 'data/api'
 
 import { patch } from 'data/fetchers'
 import type { ResponseError } from 'types'
@@ -13,7 +12,7 @@ export async function updateVercelConnection({ id, envSyncTargets }: UpdateConne
       path: { connection_id: id },
     },
     body: {
-      env_sync: envSyncTargets,
+      env_sync_targets: envSyncTargets,
     },
   })
 
