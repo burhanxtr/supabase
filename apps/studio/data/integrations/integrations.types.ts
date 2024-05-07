@@ -265,8 +265,10 @@ export type GitHubConnectionCreateVariables = {
   connection: components['schemas']['CreateGitHubConnectionsBody']
 }
 
+type EnvironmentTargets = 'production' | 'preview' | 'development'
+
 export type UpdateConnectionPayload = {
   id: string
   organizationIntegrationId: string
-  envSyncTargets: Imetadata
+  envSyncTargets: EnvironmentTargets[]
 }
