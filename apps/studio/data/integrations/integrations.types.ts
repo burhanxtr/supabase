@@ -154,7 +154,7 @@ export type IntegrationProjectConnection = {
   supabase_project_ref: string
   foreign_project_id: string
   organization_integration_id: string
-  env_sync_targets: string[]
+  env_sync_targets?: string[]
   metadata: Imetadata
 }
 
